@@ -1,0 +1,20 @@
+function BuySell() {
+  var sheet1 = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  
+  for(var i=2; i<20; i++){
+    
+    //Buy if CurrentMarketPrice goes below Target Price
+    if(sheet1.getRange(i,4).getValue()=="Buy" && sheet1.getRange(i,2).getValue() < sheet1.getRange(i,3).getValue()){
+      //Logger.log(sheet1.getRange(i,4).getValue() + " " + sheet1.getRange(i,1).getValue());
+      MailApp.sendEmail("yugjain59@gmail.com", "Time to Buy : "+ sheet1.getRange(i,1).getValue() , 
+                         sheet1.getRange(i,1).getValue() + " has hit " + sheet1.getRange(i,2).getValue())
+    }
+    
+    //Sell if CurrentMarketPrice goes above Target Price
+    if(sheet1.getRange(i,4).getValue()=="Sell" && sheet1.getRange(i,2).getValue() > sheet1.getRange(i,3).getValue()){
+      //Logger.log(sheet1.getRange(i,4).getValue() + " " + sheet1.getRange(i,1).getValue());
+      MailApp.sendEmail("yugjain59@gmail.com", "Time to Sell : "+ sheet1.getRange(i,1).getValue() , 
+                         sheet1.getRange(i,1).getValue() + " has hit " + sheet1.getRange(i,2).getValue())
+    }
+  }
+}
